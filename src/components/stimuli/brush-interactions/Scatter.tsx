@@ -270,22 +270,22 @@ export function Scatter({
                 {circles}
                 <g id="brushXRef" ref={brushXRef}></g>
                 <g id="brushYRef" ref={brushYRef}></g>
-                {xScale && yScale && brushType === 'Paintbrush Selection' ? <Paintbrush params={params} data={data} filteredTable={filteredTable} isSelect={isPaintbrushSelect} xScale={xScale} yScale={yScale} setFilteredTable={setFilteredTable} table={fullTable}/> : null}
+                {xScale && yScale && brushType === 'Paintbrush Selection' ? <Paintbrush params={params} data={data} filteredTable={filteredTable} isSelect={isPaintbrushSelect} xScale={xScale as any} yScale={yScale} setFilteredTable={setFilteredTable} table={fullTable}/> : null}
             </svg>
             {brushType === 'Slider Selection' && xScale && yScale ? 
                 <Stack style={{flexGrow: 1}} spacing={50}>
                     <Stack spacing={0}>
                         <Text>{params.x}</Text>
-                        <RangeSlider label={null} min={xScale.domain()[0]} max={xScale.domain()[1]} labelAlwaysOn={false} onChange={(value) => {
+                        <RangeSlider label={null} min={xScale.domain()[0] as any} max={xScale.domain()[1] as any} labelAlwaysOn={false} onChange={(value) => {
                             setBrushedSpace([[xScale(value[0]), brushState.y1], [xScale(value[1]),brushState.y2]]);
                         }} style={{width: '300px'}} 
                             marks={
                                 xScale.ticks(5).map((t) => ({
                                     value: t,
                                     label: t
-                                })) 
+                                })) as any
                             } 
-                            value={[xScale.invert(brushState.x1), xScale.invert(brushState.x2)]}/>
+                            value={[xScale.invert(brushState.x1), xScale.invert(brushState.x2)] as any}/>
                     </Stack>
                     <Stack spacing={0}>
                         <Text>{params.y}</Text>
